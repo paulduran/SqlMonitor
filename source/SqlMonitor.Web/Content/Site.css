@@ -162,7 +162,7 @@ hr {
 }
 
 #main-nav-container {
-	background: #D47600;
+	background: #587498;
 	width: 990px;
 	border-bottom: 1px solid #FFF;
 	clear: both;
@@ -760,16 +760,16 @@ h3.ui-accordion-header {
 .ui-button.ui-button-text-only.ui-state-default,
 .ui-button.ui-button-text-icon-primary.ui-state-default,
 .ui-button.ui-button-text-icon-secondary.ui-state-default {
-	border: 1px solid #739600!important;
-	background: #739600 url(images/button-background-green.gif) 50% 50% repeat-x!important;
+	border: 1px solid #FF634D!important;
+	background: #FF634D url(images/button-background-red.gif) 50% 50% repeat-x!important;
 	color: #FFF!important;
 }
 
 .ui-button.ui-button-text-only.ui-state-hover,
 .ui-button.ui-button-text-icon-primary.ui-state-hover,
 .ui-button.ui-button-text-icon-secondary.ui-state-hover {
-	border: 1px solid #739600!important;
-	background: #739600!important;
+	border: 1px solid #FF634D!important;
+	background: #FF634D!important;
 	color: #FFF!important;
 }
 

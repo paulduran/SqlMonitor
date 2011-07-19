@@ -49,6 +49,15 @@ app.config file and then add the names of the connection strings into the SqlMon
 
     <add key="DatabaseNames" value="Orders,Billing,Shipping"/>
 	
+To debug:
+* open the solution properties
+  * select 'Multiple Startup Projects'
+  * set action for SqlMonitor.Server and SqlMonitor.Web to 'Start'
+* open the SqlMonitor.Server project properties.
+  * select the Debug tab
+  * under 'Start Action', select 'Start external program'
+  * browse to the SqlMonitor.Server\bin\debug folder and select NServiceBus.Host.exe
+	
 Screenshots
 -----------
 Here is a screenshot of the query listing page. The graph at the bottom is showing the results of two different 
