@@ -1,12 +1,12 @@
 USE [master]
 GO
-CREATE LOGIN [SqlMonitor] WITH PASSWORD=N'h4rr13r', DEFAULT_DATABASE=[Harrier], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
+CREATE LOGIN [SqlMonitor] WITH PASSWORD=N'$q1m0n', DEFAULT_DATABASE=[SqlMonitor], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
 GO
-USE [Harrier]
+USE [SqlMonitor]
 GO
-CREATE USER [Harrier] FOR LOGIN [Harrier]
+CREATE USER [SqlMonitor] FOR LOGIN [SqlMonitor]
 GO
-USE [Harrier]
+USE [SqlMonitor]
 GO
-EXEC sp_addrolemember N'db_owner', N'Harrier'
+EXEC sp_addrolemember N'db_owner', N'SqlMonitor'
 GO
