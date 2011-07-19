@@ -1,0 +1,27 @@
+﻿<div>
+    @Html.DropDownList("duration", new SelectList(ViewBag.Durations, "Value", "Text", ViewBag.SelectedDuration))
+    <button id="update-results" type="submit">
+        Update</button>
+    <div id="customDateRange" style="display: none">
+        <div class="clear10">
+        </div>
+        From Date: @Html.TextBox("fromDate", "", new { @class = "datepicker" })
+        &nbsp;&nbsp;To Date: @Html.TextBox("toDate", "", new { @class = "datepicker" })
+    </div>
+    &nbsp;
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#duration").change(function () {
+            showHideCustomFields();
+        });
+        showHideCustomFields();
+    });
+    function showHideCustomFields() {
+        if ($('#duration').val() == '0') {
+            $('#customDateRange').fadeIn();
+        } else {
+            $('#customDateRange').fadeOut();
+        }
+    }
+</script>

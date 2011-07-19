@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SqlMonitor.Core.Domain.QueryResult>
+@functions
+{
+    long GetJavascriptTimestamp(DateTime input)
+    {
+        System.TimeSpan span = new System.TimeSpan(System.DateTime.Parse("1/1/1970").Ticks);
+        System.DateTime time = input.Subtract(span);
+        return (long)(time.Ticks / 10000);
+    }
+}
+    
+
+<script type="text/javascript">
+$(function() {
+    var points = [];
+    var options = {
+         xaxis: {
+            mode: "time",
+            timeformat: "%H:%M",
+            axisLabel: 'Date Run',
+            axisLabelUseCanvas: false
+        },
+        yaxis: { 
+            axisLabel: 'Time Taken (ms)', 
+            axisLabelUseCanvas: false 
+        }
+    }
+    @foreach(var result in Model) {
+        var duration = result.ErrorMessage == "The command has timed out." ? ViewBag.TimeOutDisplayValue : result.Duration.TotalMilliseconds;
+        @:points.push(['@GetJavascriptTimestamp(result.StartDate)', '@duration']);          
+    }
+    var threshold = [];
+    threshold.push(['@GetJavascriptTimestamp(ViewBag.MinDate)', '@ViewBag.Threshold']);
+    threshold.push(['@GetJavascriptTimestamp(ViewBag.MaxDate)', '@ViewBag.Threshold']);
+
+    $.plot($("#graph"), [ {label: '@ViewBag.GraphTitle', data:points}, {label: 'Threshold', data: threshold} ], options);
+});
+</script>
+
+<div id="graph" style="width:600px;height:300px;">
+
+</div>

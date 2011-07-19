@@ -1,0 +1,55 @@
+﻿@model IEnumerable<SqlMonitor.Core.Domain.Query>
+@{
+    ViewBag.Title = "Graph Builder";
+}
+<h2>
+    Graph Builder</h2>
+@using (Ajax.BeginForm("GraphBuilderResult", (new AjaxOptions { UpdateTargetId = "graph-result" })))
+{
+    <table class="steps-table" width="100%">
+        <tr>
+            <td valign="top">
+                <span class="steps">Step 1</span> <strong>Select Queries</strong>
+                <div class="clear20">
+                </div>
+                <ul class="graph-select-query">
+                    @foreach (var query in Model)
+                    {
+                        <li>@*@Html.CheckBox("query-" + query.QueryId)
+                            <label for="query-@query.QueryId">@query.Name</label>*@
+                            <input type="checkbox" name="id" value="@query.QueryId" /> @query.Name
+                            </li>
+                    }
+                </ul>
+            </td>
+            <td valign="top">
+                <span class="steps">Step 2</span> <strong>Select Time Period</strong>
+                <div class="clear20">
+                </div>
+                @Html.Partial("QueryDuration")
+            </td>
+           <!-- <td valign="top">
+                <span class="steps">Step 3</span> <strong>Preview Results</strong>
+                <div class="clear20">
+                </div>
+                <button id="preview">Preview</button>
+                <div class="clear20">
+                </div>
+                <span class="steps">Step 4</span> <strong>Add Graph to Dashboard</strong>
+                <div class="clear20">
+                </div>
+                <button id="addToDashboard">
+                    Add to Dashboard</button>
+                <div class="clear20">
+                </div>
+            </td> -->
+        </tr>
+    </table>
+}
+<div class="clear20">
+</div>
+<div id="graph-result">
+</div>
+<!--[if IE]><script language="javascript" type="text/javascript" src="@Url.Content("~/Scripts/excanvas.min.js")"></script><![endif]-->
+<script src="@Url.Content("~/Scripts/jquery.flot.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.flot.axislabels.js")" type="text/javascript"></script>

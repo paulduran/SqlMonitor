@@ -1,0 +1,108 @@
+﻿<p>Here are some full examples:</p>
+<table cellpadding="3" cellspacing="1">
+    <tbody>
+        <tr>
+            <th>Expression</th>
+
+            <th>Meaning</th>
+        </tr>
+        <tr>
+            <td><tt>0 0 12 * * ?</tt></td>
+
+            <td>Fire at 12pm (noon) every day</td>
+        </tr>
+        <tr>
+
+            <td><tt>0 15 10 ? * *</tt></td>
+            <td>Fire at 10:15am every day</td>
+        </tr>
+        <tr>
+            <td><tt>0 15 10 * * ?</tt></td>
+
+            <td>Fire at 10:15am every day</td>
+
+        </tr>
+        <tr>
+            <td><tt>0 15 10 * * ? *</tt></td>
+            <td>Fire at 10:15am every day</td>
+        </tr>
+        <tr>
+            <td><tt>0 15 10 * * ? 2005</tt></td>
+
+            <td>Fire at 10:15am every day during the year 2005</td>
+        </tr>
+        <tr>
+            <td><tt>0 * 14 * * ?</tt></td>
+            <td>Fire every minute starting at 2pm and ending at 2:59pm, every day</td>
+        </tr>
+        <tr>
+
+            <td><tt>0 0/5 14 * * ?</tt></td>
+
+            <td>Fire every 5 minutes starting at 2pm and ending at 2:55pm, every day</td>
+        </tr>
+        <tr>
+            <td><tt>0 0/5 14,18 * * ?</tt></td>
+            <td>Fire every 5 minutes starting at 2pm and ending at 2:55pm, AND fire every 5
+            minutes starting at 6pm and ending at 6:55pm, every day</td>
+
+        </tr>
+        <tr>
+            <td><tt>0 0-5 14 * * ?</tt></td>
+
+            <td>Fire every minute starting at 2pm and ending at 2:05pm, every day</td>
+        </tr>
+        <tr>
+            <td><tt>0 10,44 14 ? 3 WED</tt></td>
+
+            <td>Fire at 2:10pm and at 2:44pm every Wednesday in the month of March.</td>
+        </tr>
+        <tr>
+            <td><tt>0 15 10 ? * MON-FRI</tt></td>
+
+            <td>Fire at 10:15am every Monday, Tuesday, Wednesday, Thursday and Friday</td>
+        </tr>
+        <tr>
+
+            <td><tt>0 15 10 15 * ?</tt></td>
+            <td>Fire at 10:15am on the 15th day of every month</td>
+        </tr>
+        <tr>
+            <td><tt>0 15 10 L * ?</tt></td>
+
+            <td>Fire at 10:15am on the last day of every month</td>
+
+        </tr>
+        <tr>
+            <td><tt>0 15 10 ? * 6L</tt></td>
+            <td>Fire at 10:15am on the last Friday of every month</td>
+        </tr>
+        <tr>
+            <td><tt>0 15 10 ? * 6L</tt></td>
+
+            <td>Fire at 10:15am on the last Friday of every month</td>
+        </tr>
+        <tr>
+            <td><tt>0 15 10 ? * 6L 2002-2005</tt></td>
+            <td>Fire at 10:15am on every last friday of every month during the years 2002,
+            2003, 2004 and 2005</td>
+        </tr>
+        <tr>
+
+            <td><tt>0 15 10 ? * 6#3</tt></td>
+
+            <td>Fire at 10:15am on the third Friday of every month</td>
+        </tr>
+        <tr>
+            <td><tt>0 0 12 1/5 * ?</tt></td>
+            <td>Fire at 12pm (noon) every 5 days every month, starting on the first day of the
+            month.</td>
+
+        </tr>
+        <tr>
+            <td><tt>0 11 11 11 11 ?</tt></td>
+
+            <td>Fire every November 11th at 11:11am.</td>
+        </tr>
+    </tbody>
+</table>

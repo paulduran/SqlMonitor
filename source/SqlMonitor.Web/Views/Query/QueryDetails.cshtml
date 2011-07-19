@@ -1,0 +1,86 @@
+﻿@model SqlMonitor.Core.Domain.Query
+<table class="table-no-border">
+    <tr>
+        <td>
+            <div class="display-label">
+                Name</div>
+        </td>
+        <td>
+            <div class="display-field">@Model.Name</div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="display-label">
+                Database Name</div>
+        </td>
+        <td>
+            <div class="display-field">@Model.DatabaseName</div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="display-label">
+                Query Text</div>
+        </td>
+        <td>
+            <div class="display-field">
+                <pre>@Model.QueryText</pre>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="display-label">
+                CronExpression</div>
+        </td>
+        <td>
+            <div class="display-field">
+                <pre>@Model.CronExpression</pre>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="display-label">
+                Last Run</div>
+        </td>
+        <td>
+            <div class="display-field">@String.Format("{0:g}", Model.LastRun)</div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="display-label">
+                Next Run</div>
+        </td>
+        <td>
+            <div class="display-field">@String.Format("{0:g}", Model.NextRun)</div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="display-label">
+                Query Threshold</div>
+        </td>
+        <td>
+            <div class="display-field">@Html.FormatTimespan(new TimeSpan(0,0,0,0,Model.ThresholdMilliseconds))</div>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div class="display-label">
+                Alerting</div>
+        </td>
+        <td>
+            <div class="display-field">@if (Model.AlertIfAboveThreshold)
+                                       {
+                                           @:Alerts sent to @Html.DisplayFor(x => x.AlertEmailTo)
+                                        }
+                                       else
+                                       {
+                                           @:Alerting not enabled for this query
+                                       }</div>
+        </td>
+    </tr>
+</table>

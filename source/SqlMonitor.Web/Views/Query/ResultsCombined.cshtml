@@ -1,0 +1,13 @@
+﻿@model IEnumerable<SqlMonitor.Core.Domain.QueryResult>
+
+<div style="text-align: center; padding-bottom: 10px;">Results from @ViewBag.MinDate to @ViewBag.MaxDate</div>
+
+<div id="query-results" class="float-left">
+    @Html.Partial("Results", Model)  
+</div>
+
+<div id="graph-placeholder" class="float-right">
+    @Html.Partial("Graph", Model)
+</div>
+<div class="clear">
+</div>

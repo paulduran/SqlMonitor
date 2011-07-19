@@ -1,0 +1,10 @@
+1) Run script to create queues
+	- SqlMonitor.ClientQueue
+	- SqlMonitor.ServerQueue
+	- error
+	- nservicebus_subscriptions
+2) create app pool, iis application
+3) grant permissions to IIS user for those queues 
+4) create sql db
+5) run server installer NServiceBus.Host.exe /install /serviceName:"SqlMonitor" /displayName:"Sql Performance Monitor"
+6) update connection strings in web and server

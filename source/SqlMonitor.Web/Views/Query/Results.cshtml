@@ -1,0 +1,45 @@
+﻿@model IEnumerable<SqlMonitor.Core.Domain.QueryResult>
+<table>
+    <thead>
+        <tr>
+            <th>
+                Start
+            </th>
+            <th>
+                Duration
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var result in Model)
+        {            
+            <tr>
+                <td>
+                    @Html.DisplayFor(x => result.StartDate)
+                </td>
+                <td>
+                    @if (result.Duration.TotalMilliseconds > ViewBag.Threshold)
+                    {
+                        <div class="field-validation-error">@Html.FormatTimespan(result.Duration)</div>
+                    }
+                    else if (result.Success)
+                    {
+                    @Html.FormatTimespan(result.Duration)
+                    }
+                    else
+                    {   
+                        <img src="@Url.Content("~/Content/Images/Error.gif")" alt="Error" class="error-with-tooltip" />
+                        <div class="tooltip" style="display: none">
+                            @result.ErrorMessage
+                        </div>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script type="text/javascript">
+    $(function () {
+        $('.error-with-tooltip').tooltip({ position: 'center right'});
+    });
+</script>

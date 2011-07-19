@@ -1,0 +1,117 @@
+﻿@model SqlMonitor.Core.Domain.Query
+<div id="edit-query-form">
+    @using (Ajax.BeginForm(new AjaxOptions { UpdateTargetId = "edit-query-form" }))
+    {
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(m => m.QueryId)
+        <table class="table-no-border">
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(x => x.Name)</div>
+                </td>
+                <td>
+                    <div class="editor-field">@Html.TextBoxFor(x => x.Name)
+                    @Html.ValidationMessageFor(model => model.Name)</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(x => x.DatabaseName)</div>
+                </td>
+                <td>
+                    <div class="editor-field">@Html.DropDownListFor(x => x.DatabaseName, new SelectList(ViewBag.Databases), "--Select--")
+                    @Html.ValidationMessageFor(model => model.DatabaseName)</div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(x => x.QueryText)</div>
+                </td>
+                <td>
+                    <div class="editor-field">@Html.TextAreaFor(x => x.QueryText, new { rows = 4, cols = 100 })
+                    @Html.ValidationMessageFor(model => model.QueryText)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(x => x.CronExpression)</div>
+                </td>
+                <td>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(x => x.CronExpression, new { size = 100 })<img src="@Url.Content("~/Content/Images/help.png")" id="help" width="16" height="16" />
+                        @Html.ValidationMessageFor(model => model.CronExpression)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(x => x.ThresholdMilliseconds)</div>
+                </td>
+                <td>
+                    <div class="editor-field">@Html.TextBoxFor(x => x.ThresholdMilliseconds)
+                    @Html.ValidationMessageFor(model => model.ThresholdMilliseconds)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(x => x.AlertIfAboveThreshold)</div>
+                </td>
+                <td>
+                    <div class="editor-field">@Html.CheckBoxFor(x => x.AlertIfAboveThreshold)
+                    @Html.ValidationMessageFor(model => model.AlertIfAboveThreshold)
+                    </div>
+                </td>
+            </tr>
+            <tr class="alert-config">
+                <td>
+                    <div class="editor-label">
+                        @Html.LabelFor(x => x.AlertEmailTo)</div>
+                </td>
+                <td>
+                    <div class="editor-field">@Html.TextBoxFor(x => x.AlertEmailTo, new { size = 50 })
+                    @Html.ValidationMessageFor(model => model.AlertEmailTo)
+                    </div>
+                </td>
+            </tr>
+        </table>
+        
+        
+        <div class="float-right">
+            <button name="editAction" type="submit" value="Cancel">Cancel</button>
+            <button name="editAction" type="submit" value="Save">Save</button>
+        </div>
+        <div class="clear"></div>
+    }
+</div>
+<div id="cron-help" style="display: none"></div>
+<script type="text/javascript">
+    applyUIStyles($('#edit-query-form'));
+
+    function showHideAlertConfig() {
+        if ($('#AlertIfAboveThreshold').attr('checked')) {
+            $('.alert-config').fadeIn();
+        } else {
+            $('.alert-config').fadeOut();
+        }
+    }
+
+    $('#help').click(function () {
+        $('#cron-help').load('@Url.Action("CronHelp")', function () {
+            $('#cron-help').dialog({ title: 'Examples', width: 550, height: 400 });
+        });
+    });
+
+    $('#AlertIfAboveThreshold').change(function () {
+        showHideAlertConfig();
+    });
+    showHideAlertConfig();
+
+</script>

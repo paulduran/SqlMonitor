@@ -1,0 +1,43 @@
+﻿@model IEnumerable<SqlMonitor.Core.Domain.Query>
+           
+@functions
+{
+    long GetJavascriptTimestamp(DateTime input)
+    {
+        System.TimeSpan span = new System.TimeSpan(System.DateTime.Parse("1/1/1970").Ticks);
+        System.DateTime time = input.Subtract(span);
+        return (long)(time.Ticks / 10000);
+    }
+}
+    
+
+<script type="text/javascript">
+$(function() {
+    var points = [];
+    var options = {
+         xaxis: {
+            mode: "time",
+            timeformat: "%H:%M",
+            axisLabel: 'Date Run',
+            axisLabelUseCanvas: false
+        },
+        yaxis: { 
+            axisLabel: 'Time Taken (ms)', 
+            axisLabelUseCanvas: false 
+        }
+    }
+    $.plot($("#graph"), [ 
+        @foreach(var query in Model) {
+            @:{label: '@query.Name', data: [@foreach(var result in query.Results) {
+                var duration = result.ErrorMessage == "The command has timed out." ? ViewBag.TimeOutDisplayValue : result.Duration.TotalMilliseconds;
+                @:['@GetJavascriptTimestamp(result.StartDate)', '@duration'],
+            }
+            ]},
+        }
+    ], options);
+});
+</script>
+
+<div id="graph" style="width:800px;height:300px;">
+
+</div>

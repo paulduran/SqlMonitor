@@ -1,0 +1,69 @@
+﻿<style type="text/css">
+    .cron-select
+    {
+        width: 180px;
+        height: 200px;
+    }
+    .cron-column
+    {
+        float: left;
+        padding-right: 20px;
+    }
+</style>
+<div class="cron-column">
+    <h2>
+        Minute</h2>
+    Every Minute: @Html.CheckBox("everyMinute")<br />
+    <select id="minute" class="cron-select" multiple="multiple">
+        @foreach (var minute in Enumerable.Range(0, 60))
+    {
+            <option value="@minute">@minute</option>
+    }
+    </select>
+</div>
+<div class="cron-column">
+    <h2>
+        Hour</h2>
+    Every Hour: @Html.CheckBox("everyHour")<br />
+    <select id="hour" class="cron-select" multiple="multiple">
+        @foreach (var hour in Enumerable.Range(0, 24))
+    {
+            <option value="@hour">@hour</option>
+    }
+    </select>
+</div>
+<div class="cron-column">
+    <h2>
+        Day Of Month</h2>
+    Every Day: @Html.CheckBox("everyDayOfMonth")<br />
+    <select id="dayOfMonth" class="cron-select" multiple="multiple">
+        @foreach (var day in Enumerable.Range(1, 31))
+    {
+            <option value="@day">@day</option>
+    }
+    </select>
+</div>
+<div class="cron-column">
+    <h2>
+        Month</h2>
+    Every Month: @Html.CheckBox("everyMonth")<br />
+    <select id="month" class="cron-select" multiple="multiple">
+        @foreach (var month in Enumerable.Range(1, 12))
+    {
+            <option value="@month">@month</option>
+    }
+    </select>
+</div>
+<div class="cron-column">
+    <h2>
+        Day of Week</h2>
+    Every Weekday: @Html.CheckBox("everyDayOfWeek")<br />
+    <select id="dayOfWeek" class="cron-select" multiple="multiple">
+        @foreach (var day in new[] { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" })
+    {
+            <option value="@day">@day</option>
+    }
+    </select>
+</div>
+<div style="clear: both">
+</div>

@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/jquery/jquery-ui-1.8.5.custom.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/jquery.loadmask.css")" rel="stylesheet" type="text/css" />    
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />        
+    <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+</head>
+<body>
+    <script type="text/javascript">
+    var basePath = "@Url.Content("~/")";
+    </script>
+    <div id="header-container">
+        <div class="float-right">
+            <ul>
+                <li><strong>@User.Identity.Name</strong></li>
+            </ul>
+        </div>
+        <div class="float-left">
+            <h1 style="font-size: 28px; color: #666"><img src="@Url.Content("~/Content/images/logo.png")" alt="" style="vertical-align: middle"/><span id="title">Sql Performance Monitor</span></h1>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="l-r-border">
+        <div id="main-nav-container">
+        
+            <div class="clear">
+            </div>
+        </div>
+        <!-- <div id="page-header-container">
+            <div class="float-left">
+                
+            </div>
+            <div class="float-right">@RenderSection("HeaderLinks", required: false)</div>
+            <div class="clear">
+            </div>
+        </div> -->
+    </div>
+    <div class="errorMessage">@ViewBag.Message</div>
+    <div id="body-container">
+        @RenderBody()
+    </div>
+    <div id="footer-container">
+        <div class="float-right">
+            <ul>
+                <li><strong>Sql Performance Monitor - by Paul Duran</strong></li>
+            </ul>
+        </div>        
+        <div class="clear">
+        </div>
+    </div>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-ui-1.8.5.custom.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.placeholder.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.loadmask.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/tooltip.js")"></script>    
+    <script type="text/javascript" src="@Url.Content("~/Scripts/ui.js")"></script>        
+</body>
+</html>
