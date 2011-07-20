@@ -8,6 +8,7 @@ using Bootstrap.WindsorExtension;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using NServiceBus;
+using SqlMonitor.DataServices;
 
 namespace SqlMonitor.Web.Windsor
 {
@@ -40,6 +41,7 @@ namespace SqlMonitor.Web.Windsor
                 .Start();
 
             container.Register(Component.For<IBus>().Instance(bus));
+            container.Register(Component.For<QueryContext>().ImplementedBy<QueryContext>().LifeStyle.PerWebRequest);
         }
 
         private static void RegisterControllers(IWindsorContainer container)

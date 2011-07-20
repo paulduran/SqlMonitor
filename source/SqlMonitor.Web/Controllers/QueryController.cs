@@ -5,8 +5,8 @@ using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using NServiceBus;
-using SqlMonitor.Core.DataInterfaces;
 using SqlMonitor.Core.Domain;
+using SqlMonitor.DataServices;
 using SqlMonitor.Messages.Commands;
 
 namespace SqlMonitor.Web.Controllers
@@ -14,14 +14,14 @@ namespace SqlMonitor.Web.Controllers
     public class QueryController : Controller
     {
         private readonly IBus bus;
-        private readonly IQueryDao queryDao;
+        private readonly QueryContext queryContext;
         private readonly IEnumerable<string> databases;
         private const int QueryTimeoutMilliseconds = 120000;
 
-        public QueryController(IBus bus, IQueryDao queryDao)
+        public QueryController(IBus bus, QueryContext queryContext)
         {
             this.bus = bus;
-            this.queryDao = queryDao;
+            this.queryContext = queryContext;
             databases = ConfigurationManager.AppSettings["DatabaseNames"].Split(',');
         }
 
@@ -60,7 +60,7 @@ namespace SqlMonitor.Web.Controllers
 
         public ActionResult Edit(int id)
         {
-            var query = queryDao.GetById(id);
+            var query = queryContext.Queries.Find(id);
             ViewBag.Databases = databases;
             return PartialView(query);
         }
@@ -70,7 +70,7 @@ namespace SqlMonitor.Web.Controllers
         {
             if (editAction == "Cancel")
             {
-                query = queryDao.GetById(query.QueryId);
+                query = queryContext.Queries.Find(query.QueryId);
                 return PartialView("QueryDetails", query);
             }
 
@@ -87,7 +87,7 @@ namespace SqlMonitor.Web.Controllers
         public ActionResult Details(int id)
         {
             AssignDurationsToViewBag();
-            var query = queryDao.GetById(id);
+            var query = queryContext.Queries.Find(id);
             return View(query);
         }
 
@@ -107,7 +107,7 @@ namespace SqlMonitor.Web.Controllers
 
         public ActionResult Graph(int id, DateTime? fromDate, DateTime? toDate, int duration)
         {
-            var query = queryDao.GetById(id);
+            var query = queryContext.Queries.Find(id);
             IEnumerable<QueryResult> results = GetResults(query, duration, fromDate, toDate);
 
             ViewBag.MinDate = results.Min(x => x.StartDate);
@@ -121,7 +121,7 @@ namespace SqlMonitor.Web.Controllers
         public ActionResult GraphBuilder()
         {
             AssignDurationsToViewBag();
-            var queries = queryDao.GetQueries();
+            var queries = queryContext.Queries.ToList();
             return View(queries);
         }
 
@@ -130,7 +130,7 @@ namespace SqlMonitor.Web.Controllers
             List<Query> resultList = new List<Query>();
             foreach(var queryId in id)
             {
-                var query = queryDao.GetById(queryId);                
+                var query = queryContext.Queries.Find(queryId);       
                 IEnumerable<QueryResult> results = GetResults(query, duration, fromDate, toDate);
                 var queryCopy = new Query {Name = query.Name, Results = results.ToList() };
                 resultList.Add(queryCopy);
@@ -141,7 +141,7 @@ namespace SqlMonitor.Web.Controllers
 
         public ActionResult ResultsCombined(int id, DateTime? fromDate, DateTime? toDate, int duration)
         {
-            var query = queryDao.GetById(id);
+            var query = queryContext.Queries.Find(id);
             IEnumerable<QueryResult> results = GetResults(query, duration, fromDate, toDate);
 
             if (results.Any())
@@ -157,7 +157,7 @@ namespace SqlMonitor.Web.Controllers
 
         public ActionResult Results(int id, DateTime? fromDate, DateTime? toDate, int duration)
         {
-            var query = queryDao.GetById(id);
+            var query = queryContext.Queries.Find(id);
             var results = GetResults(query, duration, fromDate, toDate);
             return PartialView(results);
         }
@@ -185,7 +185,7 @@ namespace SqlMonitor.Web.Controllers
         public ActionResult List()
         {
             AssignDurationsToViewBag();
-            var queries = queryDao.GetQueries();
+            var queries = queryContext.Queries.ToList();
             return View("List", queries);
         }
     }
