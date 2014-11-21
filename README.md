@@ -22,7 +22,7 @@ Technologies
 * Entity Framework 4.1 (Code First)
 * NServiceBus
 * Castle Windsor (for IoC)
-* Spring.Net (for data access)
+* Entity Framework
 * Quartz.Net (for scheduling)
 * Bootstrapper
 * AutoMapper
